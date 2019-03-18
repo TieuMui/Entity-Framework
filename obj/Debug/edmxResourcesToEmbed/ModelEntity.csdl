@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBanHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CTDONH">
+    <Key>
+      <PropertyRef Name="SODH" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SODH" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MAVTU" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="SLDAT" Type="Int32" />
+    <NavigationProperty Name="DONDH" Relationship="Self.FK_CTDONH_DONDH1" FromRole="CTDONH" ToRole="DONDH" />
+    <NavigationProperty Name="VATTU" Relationship="Self.FK_CTDONH_VATTU" FromRole="CTDONH" ToRole="VATTU" />
+  </EntityType>
+  <EntityType Name="CTPNHAP">
+    <Key>
+      <PropertyRef Name="SOPN" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SOPN" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MAVTU" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="SLNHAP" Type="Int32" />
+    <Property Name="DGNHAP" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="PNHAP" Relationship="Self.FK_CTPNHAP_PNHAP" FromRole="CTPNHAP" ToRole="PNHAP" />
+    <NavigationProperty Name="VATTU" Relationship="Self.FK_CTPNHAP_VATTU" FromRole="CTPNHAP" ToRole="VATTU" />
+  </EntityType>
+  <EntityType Name="CTPXUAT">
+    <Key>
+      <PropertyRef Name="SOPX" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SOPX" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MAVTU" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="SLXUAT" Type="Int32" />
+    <Property Name="DGXUAT" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="PXUAT" Relationship="Self.FK_CTPXUAT_PXUAT" FromRole="CTPXUAT" ToRole="PXUAT" />
+    <NavigationProperty Name="VATTU" Relationship="Self.FK_CTPXUAT_VATTU" FromRole="CTPXUAT" ToRole="VATTU" />
+  </EntityType>
+  <EntityType Name="DONDH">
+    <Key>
+      <PropertyRef Name="SODH" />
+    </Key>
+    <Property Name="SODH" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NGAYDH" Type="DateTime" Precision="3" />
+    <Property Name="MANHACC" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CTDONH" Relationship="Self.FK_CTDONH_DONDH1" FromRole="DONDH" ToRole="CTDONH" />
+    <NavigationProperty Name="NHACC" Relationship="Self.FK_DONDH_NHACC" FromRole="DONDH" ToRole="NHACC" />
+    <NavigationProperty Name="PNHAP" Relationship="Self.FK_PNHAP_DONDH" FromRole="DONDH" ToRole="PNHAP" />
+  </EntityType>
+  <EntityType Name="NHACC">
+    <Key>
+      <PropertyRef Name="MANHACC" />
+    </Key>
+    <Property Name="MANHACC" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TENNHACC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DIACHI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DIENTHOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DONDH" Relationship="Self.FK_DONDH_NHACC" FromRole="NHACC" ToRole="DONDH" />
+  </EntityType>
+  <EntityType Name="PNHAP">
+    <Key>
+      <PropertyRef Name="SOPN" />
+    </Key>
+    <Property Name="SOPN" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NGAYNHAP" Type="DateTime" Precision="3" />
+    <Property Name="SODH" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CTPNHAP" Relationship="Self.FK_CTPNHAP_PNHAP" FromRole="PNHAP" ToRole="CTPNHAP" />
+    <NavigationProperty Name="DONDH" Relationship="Self.FK_PNHAP_DONDH" FromRole="PNHAP" ToRole="DONDH" />
+  </EntityType>
+  <EntityType Name="PXUAT">
+    <Key>
+      <PropertyRef Name="SOPX" />
+    </Key>
+    <Property Name="SOPX" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NGAYXUAT" Type="DateTime" Precision="3" />
+    <Property Name="TENKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NHANVIEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TIENHANG" Type="Int32" />
+    <Property Name="DATRA" Type="Int32" />
+    <Property Name="CONNO" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="CTPXUAT" Relationship="Self.FK_CTPXUAT_PXUAT" FromRole="PXUAT" ToRole="CTPXUAT" />
+  </EntityType>
+  <EntityType Name="PHIEUTHU">
+    <Key>
+      <PropertyRef Name="SOCT" />
+    </Key>
+    <Property Name="SOCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NGAYCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SOTIEN" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="DIENGIAI" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="SOPX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TONKHO">
+    <Key>
+      <PropertyRef Name="NAMTHANG" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="NAMTHANG" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MAVTU" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="SLDAU" Type="Int32" />
+    <Property Name="TONGSLNHAP" Type="Int32" />
+    <Property Name="TONGSLXUAT" Type="Int32" />
+    <Property Name="SLCUOI" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="VATTU" Relationship="Self.FK_TONKHO_VATTU" FromRole="TONKHO" ToRole="VATTU" />
+  </EntityType>
+  <EntityType Name="VATTU">
+    <Key>
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="MAVTU" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TENVTU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DVTINH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PHANTRAM" Type="Single" />
+    <NavigationProperty Name="CTDONH" Relationship="Self.FK_CTDONH_VATTU" FromRole="VATTU" ToRole="CTDONH" />
+    <NavigationProperty Name="CTPNHAP" Relationship="Self.FK_CTPNHAP_VATTU" FromRole="VATTU" ToRole="CTPNHAP" />
+    <NavigationProperty Name="CTPXUAT" Relationship="Self.FK_CTPXUAT_VATTU" FromRole="VATTU" ToRole="CTPXUAT" />
+    <NavigationProperty Name="TONKHO" Relationship="Self.FK_TONKHO_VATTU" FromRole="VATTU" ToRole="TONKHO" />
+  </EntityType>
+  <Association Name="FK_CTDONH_DONDH1">
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="1" />
+    <End Role="CTDONH" Type="Self.CTDONH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONDH">
+        <PropertyRef Name="SODH" />
+      </Principal>
+      <Dependent Role="CTDONH">
+        <PropertyRef Name="SODH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTDONH_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTDONH" Type="Self.CTDONH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTDONH">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPNHAP_PNHAP">
+    <End Role="PNHAP" Type="Self.PNHAP" Multiplicity="1" />
+    <End Role="CTPNHAP" Type="Self.CTPNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PNHAP">
+        <PropertyRef Name="SOPN" />
+      </Principal>
+      <Dependent Role="CTPNHAP">
+        <PropertyRef Name="SOPN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPNHAP_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTPNHAP" Type="Self.CTPNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTPNHAP">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPXUAT_PXUAT">
+    <End Role="PXUAT" Type="Self.PXUAT" Multiplicity="1" />
+    <End Role="CTPXUAT" Type="Self.CTPXUAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PXUAT">
+        <PropertyRef Name="SOPX" />
+      </Principal>
+      <Dependent Role="CTPXUAT">
+        <PropertyRef Name="SOPX" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPXUAT_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTPXUAT" Type="Self.CTPXUAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTPXUAT">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DONDH_NHACC">
+    <End Role="NHACC" Type="Self.NHACC" Multiplicity="1" />
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHACC">
+        <PropertyRef Name="MANHACC" />
+      </Principal>
+      <Dependent Role="DONDH">
+        <PropertyRef Name="MANHACC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PNHAP_DONDH">
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="1" />
+    <End Role="PNHAP" Type="Self.PNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONDH">
+        <PropertyRef Name="SODH" />
+      </Principal>
+      <Dependent Role="PNHAP">
+        <PropertyRef Name="SODH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TONKHO_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="TONKHO" Type="Self.TONKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="TONKHO">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBanHangEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CTDONH" EntityType="Self.CTDONH" />
+    <EntitySet Name="CTPNHAP" EntityType="Self.CTPNHAP" />
+    <EntitySet Name="CTPXUAT" EntityType="Self.CTPXUAT" />
+    <EntitySet Name="DONDH" EntityType="Self.DONDH" />
+    <EntitySet Name="NHACC" EntityType="Self.NHACC" />
+    <EntitySet Name="PNHAP" EntityType="Self.PNHAP" />
+    <EntitySet Name="PXUAT" EntityType="Self.PXUAT" />
+    <EntitySet Name="PHIEUTHU" EntityType="Self.PHIEUTHU" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TONKHO" EntityType="Self.TONKHO" />
+    <EntitySet Name="VATTU" EntityType="Self.VATTU" />
+    <AssociationSet Name="FK_CTDONH_DONDH1" Association="Self.FK_CTDONH_DONDH1">
+      <End Role="DONDH" EntitySet="DONDH" />
+      <End Role="CTDONH" EntitySet="CTDONH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTDONH_VATTU" Association="Self.FK_CTDONH_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTDONH" EntitySet="CTDONH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPNHAP_PNHAP" Association="Self.FK_CTPNHAP_PNHAP">
+      <End Role="PNHAP" EntitySet="PNHAP" />
+      <End Role="CTPNHAP" EntitySet="CTPNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPNHAP_VATTU" Association="Self.FK_CTPNHAP_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTPNHAP" EntitySet="CTPNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPXUAT_PXUAT" Association="Self.FK_CTPXUAT_PXUAT">
+      <End Role="PXUAT" EntitySet="PXUAT" />
+      <End Role="CTPXUAT" EntitySet="CTPXUAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPXUAT_VATTU" Association="Self.FK_CTPXUAT_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTPXUAT" EntitySet="CTPXUAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DONDH_NHACC" Association="Self.FK_DONDH_NHACC">
+      <End Role="NHACC" EntitySet="NHACC" />
+      <End Role="DONDH" EntitySet="DONDH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PNHAP_DONDH" Association="Self.FK_PNHAP_DONDH">
+      <End Role="DONDH" EntitySet="DONDH" />
+      <End Role="PNHAP" EntitySet="PNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TONKHO_VATTU" Association="Self.FK_TONKHO_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="TONKHO" EntitySet="TONKHO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

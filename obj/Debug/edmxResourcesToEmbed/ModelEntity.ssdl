@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBanHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CTDONH">
+    <Key>
+      <PropertyRef Name="SODH" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SODH" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="MAVTU" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="SLDAT" Type="int" />
+  </EntityType>
+  <EntityType Name="CTPNHAP">
+    <Key>
+      <PropertyRef Name="SOPN" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SOPN" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="MAVTU" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="SLNHAP" Type="int" />
+    <Property Name="DGNHAP" Type="money" />
+  </EntityType>
+  <EntityType Name="CTPXUAT">
+    <Key>
+      <PropertyRef Name="SOPX" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="SOPX" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="MAVTU" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="SLXUAT" Type="int" />
+    <Property Name="DGXUAT" Type="money" />
+  </EntityType>
+  <EntityType Name="DONDH">
+    <Key>
+      <PropertyRef Name="SODH" />
+    </Key>
+    <Property Name="SODH" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="NGAYDH" Type="datetime" />
+    <Property Name="MANHACC" Type="char" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NHACC">
+    <Key>
+      <PropertyRef Name="MANHACC" />
+    </Key>
+    <Property Name="MANHACC" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="TENNHACC" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DIACHI" Type="nvarchar" MaxLength="200" />
+    <Property Name="DIENTHOAI" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'QLBanHang.dbo.NHANVIEN' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="NHANVIEN">
+          <Property Name="TENNHANVIEN" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="PNHAP">
+    <Key>
+      <PropertyRef Name="SOPN" />
+    </Key>
+    <Property Name="SOPN" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="NGAYNHAP" Type="datetime" />
+    <Property Name="SODH" Type="char" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PXUAT">
+    <Key>
+      <PropertyRef Name="SOPX" />
+    </Key>
+    <Property Name="SOPX" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="NGAYXUAT" Type="datetime" />
+    <Property Name="TENKH" Type="nvarchar" MaxLength="100" />
+    <Property Name="NHANVIEN" Type="nvarchar" MaxLength="100" />
+    <Property Name="TIENHANG" Type="int" />
+    <Property Name="DATRA" Type="int" />
+    <Property Name="CONNO" Type="int" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="PHIEUTHU">
+    <Key>
+      <PropertyRef Name="SOCT" />
+    </Key>
+    <Property Name="SOCT" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NGAYCT" Type="nvarchar" MaxLength="50" />
+    <Property Name="SOTIEN" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="DIENGIAI" Type="nchar" MaxLength="10" />
+    <Property Name="SOPX" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TONKHO">
+    <Key>
+      <PropertyRef Name="NAMTHANG" />
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="NAMTHANG" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="MAVTU" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="SLDAU" Type="int" />
+    <Property Name="TONGSLNHAP" Type="int" />
+    <Property Name="TONGSLXUAT" Type="int" />
+    <Property Name="SLCUOI" Type="int" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="VATTU">
+    <Key>
+      <PropertyRef Name="MAVTU" />
+    </Key>
+    <Property Name="MAVTU" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="TENVTU" Type="nvarchar" MaxLength="100" />
+    <Property Name="DVTINH" Type="nvarchar" MaxLength="10" />
+    <Property Name="PHANTRAM" Type="real" />
+  </EntityType>
+  <Association Name="FK_CTDONH_DONDH1">
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="1" />
+    <End Role="CTDONH" Type="Self.CTDONH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONDH">
+        <PropertyRef Name="SODH" />
+      </Principal>
+      <Dependent Role="CTDONH">
+        <PropertyRef Name="SODH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTDONH_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTDONH" Type="Self.CTDONH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTDONH">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPNHAP_PNHAP">
+    <End Role="PNHAP" Type="Self.PNHAP" Multiplicity="1" />
+    <End Role="CTPNHAP" Type="Self.CTPNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PNHAP">
+        <PropertyRef Name="SOPN" />
+      </Principal>
+      <Dependent Role="CTPNHAP">
+        <PropertyRef Name="SOPN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPNHAP_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTPNHAP" Type="Self.CTPNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTPNHAP">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPXUAT_PXUAT">
+    <End Role="PXUAT" Type="Self.PXUAT" Multiplicity="1" />
+    <End Role="CTPXUAT" Type="Self.CTPXUAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PXUAT">
+        <PropertyRef Name="SOPX" />
+      </Principal>
+      <Dependent Role="CTPXUAT">
+        <PropertyRef Name="SOPX" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPXUAT_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="CTPXUAT" Type="Self.CTPXUAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="CTPXUAT">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DONDH_NHACC">
+    <End Role="NHACC" Type="Self.NHACC" Multiplicity="1" />
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHACC">
+        <PropertyRef Name="MANHACC" />
+      </Principal>
+      <Dependent Role="DONDH">
+        <PropertyRef Name="MANHACC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PNHAP_DONDH">
+    <End Role="DONDH" Type="Self.DONDH" Multiplicity="1" />
+    <End Role="PNHAP" Type="Self.PNHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONDH">
+        <PropertyRef Name="SODH" />
+      </Principal>
+      <Dependent Role="PNHAP">
+        <PropertyRef Name="SODH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TONKHO_VATTU">
+    <End Role="VATTU" Type="Self.VATTU" Multiplicity="1" />
+    <End Role="TONKHO" Type="Self.TONKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VATTU">
+        <PropertyRef Name="MAVTU" />
+      </Principal>
+      <Dependent Role="TONKHO">
+        <PropertyRef Name="MAVTU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBanHangModelStoreContainer">
+    <EntitySet Name="CTDONH" EntityType="Self.CTDONH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPNHAP" EntityType="Self.CTPNHAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPXUAT" EntityType="Self.CTPXUAT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DONDH" EntityType="Self.DONDH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHACC" EntityType="Self.NHACC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PNHAP" EntityType="Self.PNHAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PXUAT" EntityType="Self.PXUAT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHIEUTHU" EntityType="Self.PHIEUTHU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TONKHO" EntityType="Self.TONKHO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VATTU" EntityType="Self.VATTU" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CTDONH_DONDH1" Association="Self.FK_CTDONH_DONDH1">
+      <End Role="DONDH" EntitySet="DONDH" />
+      <End Role="CTDONH" EntitySet="CTDONH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTDONH_VATTU" Association="Self.FK_CTDONH_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTDONH" EntitySet="CTDONH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPNHAP_PNHAP" Association="Self.FK_CTPNHAP_PNHAP">
+      <End Role="PNHAP" EntitySet="PNHAP" />
+      <End Role="CTPNHAP" EntitySet="CTPNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPNHAP_VATTU" Association="Self.FK_CTPNHAP_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTPNHAP" EntitySet="CTPNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPXUAT_PXUAT" Association="Self.FK_CTPXUAT_PXUAT">
+      <End Role="PXUAT" EntitySet="PXUAT" />
+      <End Role="CTPXUAT" EntitySet="CTPXUAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPXUAT_VATTU" Association="Self.FK_CTPXUAT_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="CTPXUAT" EntitySet="CTPXUAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DONDH_NHACC" Association="Self.FK_DONDH_NHACC">
+      <End Role="NHACC" EntitySet="NHACC" />
+      <End Role="DONDH" EntitySet="DONDH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PNHAP_DONDH" Association="Self.FK_PNHAP_DONDH">
+      <End Role="DONDH" EntitySet="DONDH" />
+      <End Role="PNHAP" EntitySet="PNHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TONKHO_VATTU" Association="Self.FK_TONKHO_VATTU">
+      <End Role="VATTU" EntitySet="VATTU" />
+      <End Role="TONKHO" EntitySet="TONKHO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
